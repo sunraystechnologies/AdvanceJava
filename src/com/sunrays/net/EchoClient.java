@@ -1,9 +1,15 @@
 package com.sunrays.net;
 
-import java.io.*;
-import java.net.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
 
 /*
+ * TCP Client reads text from Console and send to the Server.  
+ * Client sends "Bye" if wanted to close conversation 
+ * 
  * copyright (c) sunRays Technologies Indore
  * @author: sunRays Developer
  * @url : www.sunrays.co.in
@@ -11,33 +17,51 @@ import java.net.*;
  */
 
 public class EchoClient {
+
 	public static void main(String[] args) throws IOException {
 
-		Socket echoSocket = new Socket("127.0.0.1", 4444);
+		// Connect to server running on given IP and Port
+		Socket cSocket = new Socket("127.0.0.1", 4444);
 
-		PrintWriter out = new PrintWriter(echoSocket.getOutputStream(), true);
-		BufferedReader in = new BufferedReader(new InputStreamReader(echoSocket
-				.getInputStream()));
+		// Open Socket's Output Stream to write to the Server
+		PrintWriter out = new PrintWriter(cSocket.getOutputStream(), true);
+
+		// Open Socket's Input Stream to read from the Server
+		BufferedReader in = new BufferedReader(new InputStreamReader(
+				cSocket.getInputStream()));
 
 		System.out.println("Echo Client Started");
+
+		// Open Input Stream to read text from Keyboard ( System.in )
 		BufferedReader stdIn = new BufferedReader(new InputStreamReader(
 				System.in));
 
-		String userInput;
-		userInput = stdIn.readLine();
+		// Read text from Keyboard
+		String line = stdIn.readLine();
 
-		while (userInput != null) {
-			out.println(userInput);
-			System.out.println("echo: " + in.readLine());
-			if ("Bye.".equals(userInput)) {
+		// Execute loop until line is not null
+		while (line != null) {
+
+			// Write text to Server
+			out.println(line);
+
+			// Received echo string and print
+			System.out.println("Echo: " + in.readLine());
+
+			// If text is "Bye" then break the loop.
+			if ("Bye".equals(line)) {
 				break;
 			}
-			userInput = stdIn.readLine();
+			// Read next line from Keyboard
+			line = stdIn.readLine();
 		}
 
+		// Close streams
 		out.close();
 		in.close();
 		stdIn.close();
-		echoSocket.close();
+
+		// Close socket
+		cSocket.close();
 	}
 }

@@ -1,9 +1,12 @@
 package com.sunrays.net;
 
 import java.net.*;
+import java.util.Scanner;
 import java.io.*;
 
 /*
+ * Writes parameter to a URL and read url contents 
+ * 
  * copyright (c) sunRays Technologies Indore 
  * @author: sunRays Developer 
  * @url : www.sunrays.co.in
@@ -14,30 +17,41 @@ public class URLWriter {
 
 	public static void main(String[] args) throws Exception {
 
-		URL url = new URL("http://www.google.co.in/search");
+		URL url = new URL("http://www.ask.com/web");
+		
+		String question = "java";
 
-		URLConnection connection = url.openConnection();
+		// Create URLConnection object
+		URLConnection conn = url.openConnection();
 
-		connection.setDoOutput(true);
+		conn.setDoOutput(true);
 
-		OutputStreamWriter out = new OutputStreamWriter(connection
-				.getOutputStream());
+		// Open output stream
+		OutputStreamWriter out = new OutputStreamWriter(conn.getOutputStream());
 
-		out.write("q=books");
-		// out.write("&hl=en&btnG=Google+Search&meta=");
+		// Write question parameter
+		out.write("q=" + question);
 
+		// Close output stream
 		out.close();
 
-		connection.connect();
+		// Connect to the Server
+		conn.connect();
 
-		BufferedReader in = new BufferedReader(new InputStreamReader(connection
-				.getInputStream()));
+		// Open input channel to read data
+		InputStream iStr = conn.getInputStream();
 
-		String decodedString;
+		// Scanner will convert bytes into text
+		Scanner in = new Scanner(iStr);
 
-		while ((decodedString = in.readLine()) != null) {
-			System.out.println(decodedString);
+		System.out.print("URL contents ***");
+
+		// Read text line by line from URL
+		while (in.hasNext()) {
+			String html = in.nextLine();
+			System.out.println(html);
 		}
+
 		in.close();
 
 	}

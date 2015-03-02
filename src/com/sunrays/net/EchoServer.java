@@ -4,6 +4,8 @@ import java.io.*;
 import java.net.*;
 
 /*
+ * Echo Server talks to multiple Clients sequentially 
+ * 
  * copyright (c) sunRays Technologies Indore
  * @author: sunRays Developer
  * @url : www.sunrays.co.in
@@ -12,45 +14,65 @@ import java.net.*;
 
 public class EchoServer {
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] a) throws IOException {
 
-		ServerSocket serverSocket = null;
-
-		serverSocket = new ServerSocket(4444);
+		// Start Server on port number 4444
+		ServerSocket sSocket = new ServerSocket(4444);
 
 		System.out.println("Echo Server is Started");
 
-		Socket clientSocket = null;
+		// Socket object
+		Socket cSocket = null;
 
 		boolean flag = true;
-
+		// Listen Clients until flag is false
 		while (flag) {
-
-			clientSocket = serverSocket.accept();
-
-			talk(clientSocket);
+			// Receive a new Client's request
+			cSocket = sSocket.accept();
+			// Talk to the Client
+			talk(cSocket);
 		}
-		System.out.println("Echo Server Stoped");
-		serverSocket.close();
+
+		// Closing Server
+		sSocket.close();
+
+		System.out.println("Echo Server is Closed");
 	}
 
-	public static void talk(Socket clientSocket) throws IOException {
+	public static void talk(Socket cSocket) throws IOException {
 
-		PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+		// Open Socket's Output Stream to write to the Client
+		PrintWriter out = new PrintWriter(cSocket.getOutputStream(), true);
+
+		// Open Socket's Input Stream to read from the Client
 		BufferedReader in = new BufferedReader(new InputStreamReader(
-				clientSocket.getInputStream()));
-		String inputLine;
-		inputLine = in.readLine();
-		while (inputLine != null) {
-			System.out.println("Server Recived " + inputLine);
-			out.println(inputLine + " .. " + inputLine);
-			if (inputLine.equals("Bye."))
+				cSocket.getInputStream()));
+
+		// Read text from Client
+		String line = in.readLine();
+
+		// Execute loop until line is null
+		while (line != null) {
+
+			System.out.println("Server Recived : " + line);
+
+			// Echo line back to the Client
+			out.println(line + " .. " + line);
+
+			// If Client sent "Bye" then break the loop.
+			if (line.equals("Bye")) {
 				break;
-			inputLine = in.readLine();
+			}
+			// Read next line
+			line = in.readLine();
 		}
+
+		// Close streams
 		out.close();
 		in.close();
-		clientSocket.close();
+
+		// Close socket
+		cSocket.close();
 
 	}
 

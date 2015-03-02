@@ -77,4 +77,8 @@ public class QuoteServerThread extends Thread {
 		}
 		return returnValue;
 	}
+
+	public static void main(String[] args) throws IOException {
+		new QuoteServerThread().start();
+	}
 }

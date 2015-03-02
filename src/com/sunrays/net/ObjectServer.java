@@ -39,8 +39,8 @@ public class ObjectServer {
 	public static void talk(Socket clientSocket) throws Exception {
 
 		PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
-		ObjectInputStream in = new ObjectInputStream(clientSocket
-				.getInputStream());
+		ObjectInputStream in = new ObjectInputStream(
+				clientSocket.getInputStream());
 
 		Employee emp = (Employee) in.readObject();
 

@@ -1,26 +1,57 @@
 package com.sunrays.net;
 
-import java.net.*;
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Scanner;
 
 /*
+ * It reads html text from a URL.
+ * 
  * copyright (c) sunRays Technologies Indore
+ * 
  * @author: sunRays Developer
- * @url : www.sunrays.co.in
- *
+ * 
+ * @url: www.sunrays.co.in
  */
 
 public class URLReader {
-	public static void main(String[] args) throws Exception {
-		URL yahoo = new URL("http://localhost:8080/jsp-examples/Hello.jsp");
-		BufferedReader in = new BufferedReader(new InputStreamReader(yahoo
-				.openStream()));
 
-		String inputLine;
+	public static void main(String[] args) {
 
-		while ((inputLine = in.readLine()) != null)
-			System.out.println(inputLine);
+		URL u = null;
 
-		in.close();
+		try {
+			u = new URL("https://www.google.co.in/search");
+
+			System.out.println("Protocol: " + u.getProtocol());
+			System.out.println("Host Name: " + u.getHost());
+			System.out.println("Port Number: " + u.getPort());
+			System.out.println("File Name: " + u.getFile());
+			
+
+			// Open input channel to read data
+			InputStream iStr = u.openStream();
+
+			// Scanner will convert bytes into text
+			Scanner in = new Scanner(iStr);
+
+			System.out.print("URL contents ***");
+
+			// Read text line by line from URL
+			while (in.hasNext()) {
+				String html = in.nextLine();
+				System.out.println(html);
+			}
+
+			in.close();
+
+		} catch (MalformedURLException e) {
+			System.out.println("Invalid URL");
+		} catch (IOException e) {
+			System.out.println("Input Output Error");
+		}
 	}
+
 }

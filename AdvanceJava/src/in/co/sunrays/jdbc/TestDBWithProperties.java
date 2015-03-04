@@ -3,12 +3,6 @@ package in.co.sunrays.jdbc;
 import java.sql.*;
 import java.util.ResourceBundle;
 
-/*
- * copyright (c) sunRays Technologies Indore
- * @author: sunRays Developer
- * @url : www.sunrays.co.in
- *
- */
 
 /**
  * Remove hard coding of Database credentials and other information.
@@ -47,7 +41,7 @@ public class TestDBWithProperties {
 		Statement stmt = conn.createStatement();
 
 		ResultSet rs = rs = stmt
-				.executeQuery("SELECT id, name, color from part");
+				.executeQuery("SELECT id, name, color from ST_PART");
 
 		System.out.println("ID\tName\tColor");
 		System.out.println("--\t----\t-----");

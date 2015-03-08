@@ -6,13 +6,26 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+/**
+ * TCP Server exchanges Hello with Client. Depicts Exception Handling.
+ * 
+ * @version 1.0
+ * @since 01 Feb 2015
+ * @author SUNRAYS Developer
+ * @Copyright (c) sunRays Technologies. All rights reserved.
+ * @URL www.sunrays.co.in
+ */
+
 public class HelloTCPServerExcpetion {
+
 	public static void main(String[] args) {
 
 		// Create a Server
 		ServerSocket server;
+
 		try {
 			server = new ServerSocket(1234);
+
 			// Wait for Client
 			Socket client;
 			client = server.accept();

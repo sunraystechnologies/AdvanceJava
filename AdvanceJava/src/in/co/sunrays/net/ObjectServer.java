@@ -2,15 +2,19 @@ package in.co.sunrays.net;
 
 import in.co.sunrays.bean.Employee;
 
-import java.io.*;
-import java.net.*;
+import java.io.ObjectInputStream;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
 
-
-/*
- * copyright (c) sunRays Technologies Indore
- * @author: sunRays Developer
- * @url : www.sunrays.co.in
+/**
+ * Object TCP Server, exchanges serializ3ed objects over network.
  * 
+ * @version 1.0
+ * @since 01 Feb 2015
+ * @author SUNRAYS Developer
+ * @Copyright (c) sunRays Technologies. All rights reserved.
+ * @URL www.sunrays.co.in
  */
 
 public class ObjectServer {
@@ -33,15 +37,20 @@ public class ObjectServer {
 
 			talk(clientSocket);
 		}
-		System.out.println("Echo Server Stoped");
+		System.out.println("Object Server Stopped");
 		serverSocket.close();
 	}
 
-	public static void talk(Socket clientSocket) throws Exception {
+	/**
+	 * Talks to the Client.
+	 * 
+	 * @param client
+	 * @throws Exception
+	 */
+	public static void talk(Socket client) throws Exception {
 
-		PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
-		ObjectInputStream in = new ObjectInputStream(
-				clientSocket.getInputStream());
+		PrintWriter out = new PrintWriter(client.getOutputStream(), true);
+		ObjectInputStream in = new ObjectInputStream(client.getInputStream());
 
 		Employee emp = (Employee) in.readObject();
 
@@ -53,7 +62,7 @@ public class ObjectServer {
 		out.println("Got the Object");
 		out.close();
 		in.close();
-		clientSocket.close();
+		client.close();
 
 	}
 

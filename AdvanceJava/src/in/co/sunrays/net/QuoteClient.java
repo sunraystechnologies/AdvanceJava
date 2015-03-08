@@ -3,12 +3,14 @@ package in.co.sunrays.net;
 import java.io.*;
 import java.net.*;
 
-/*
- * copyright (c) sunRays Technologies Indore
+/**
+ * Quote UDP Client, requests and gets quote of the day from Quote UDP Server.
  * 
- * @author: sunRays Developer
- * @url : www.sunrays.co.in
- * 
+ * @version 1.0
+ * @since 01 Feb 2015
+ * @author SUNRAYS Developer
+ * @Copyright (c) sunRays Technologies. All rights reserved.
+ * @URL www.sunrays.co.in
  */
 
 public class QuoteClient {

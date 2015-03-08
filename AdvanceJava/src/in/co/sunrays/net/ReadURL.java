@@ -5,14 +5,19 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.Scanner;
 
-public class ReadURL {
+/**
+ * Reads Text from a URL .
+ * 
+ * You need Internet connection to see the output of this program.
+ * 
+ * @version 1.0
+ * @since 01 Feb 2015
+ * @author SUNRAYS Developer
+ * @Copyright (c) sunRays Technologies. All rights reserved.
+ * @URL www.sunrays.co.in
+ */
 
-	/*
-	 * copyright (c) sunRays Technologies Indore 
-	 * @author: sunRays Developer 
-	 * @url: www.sunrays.co.in
-	 * 
-	 */
+public class ReadURL {
 
 	public static void main(String[] args) throws IOException {
 
@@ -25,7 +30,7 @@ public class ReadURL {
 
 		} catch (Exception e) {
 			System.out.println("Error in URL");
-			System.exit(0);
+			System.exit(0); // Terminate execution.
 		}
 
 		Scanner in = new Scanner(inStream);

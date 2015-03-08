@@ -2,15 +2,19 @@ package in.co.sunrays.net;
 
 import in.co.sunrays.bean.Employee;
 
-import java.io.*;
-import java.net.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
 
-
-/*
- * copyright (c) sunRays Technologies Indore
- * @author: sunRays Developer
- * @url : www.sunrays.co.in
+/**
+ * Object TCP Client, exchanges serializ3ed objects over network.
  * 
+ * @version 1.0
+ * @since 01 Feb 2015
+ * @author SUNRAYS Developer
+ * @Copyright (c) sunRays Technologies. All rights reserved.
+ * @URL www.sunrays.co.in
  */
 
 public class ObjectClient {
@@ -18,11 +22,11 @@ public class ObjectClient {
 
 		Socket echoSocket = new Socket("127.0.0.1", 4444);
 
-		ObjectOutputStream out = new ObjectOutputStream(echoSocket
-				.getOutputStream());
+		ObjectOutputStream out = new ObjectOutputStream(
+				echoSocket.getOutputStream());
 
-		BufferedReader in = new BufferedReader(new InputStreamReader(echoSocket
-				.getInputStream()));
+		BufferedReader in = new BufferedReader(new InputStreamReader(
+				echoSocket.getInputStream()));
 
 		Employee emp = new Employee(1, "Sunrays", "Technologies");
 		emp.setTempValue("8 A Shalimar Corporate");

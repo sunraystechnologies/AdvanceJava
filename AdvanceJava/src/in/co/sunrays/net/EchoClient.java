@@ -23,14 +23,14 @@ public class EchoClient {
 	public static void main(String[] args) throws IOException {
 
 		// Connect to server running on given IP and Port
-		Socket cSocket = new Socket("127.0.0.1", 4444);
+		Socket client = new Socket("127.0.0.1", 4444);
 
 		// Open Socket's Output Stream to write to the Server
-		PrintWriter out = new PrintWriter(cSocket.getOutputStream(), true);
+		PrintWriter out = new PrintWriter(client.getOutputStream(), true);
 
 		// Open Socket's Input Stream to read from the Server
 		BufferedReader in = new BufferedReader(new InputStreamReader(
-				cSocket.getInputStream()));
+				client.getInputStream()));
 
 		System.out.println("Echo Client Started");
 
@@ -64,6 +64,6 @@ public class EchoClient {
 		stdIn.close();
 
 		// Close socket
-		cSocket.close();
+		client.close();
 	}
 }

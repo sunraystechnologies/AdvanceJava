@@ -1,29 +1,35 @@
 package in.co.sunrays.net;
 
-import java.io.*;
-import java.net.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
 
-/*
- * copyright (c) sunRays Technologies Indore
- * @author: sunRays Developer
- * @url : www.sunrays.co.in
+/**
+ * Echo TCP Server handles multiple Clients concurrently.
  * 
+ * @version 1.0
+ * @since 01 Feb 2015
+ * @author SUNRAYS Developer
+ * @Copyright (c) sunRays Technologies. All rights reserved.
+ * @URL www.sunrays.co.in
  */
 
 public class MultiThreadedEchoServer extends Thread {
-	
-	private Socket clientSocket = null;
-	
+
+	private Socket client = null;
+
 	public MultiThreadedEchoServer(Socket clientSocket) {
-		this.clientSocket = clientSocket;
+		this.client = clientSocket;
 	}
-	
+
 	public void run() {
 		try {
-			PrintWriter out = new PrintWriter(clientSocket.getOutputStream(),
-					true);
+			PrintWriter out = new PrintWriter(client.getOutputStream(), true);
 			BufferedReader in = new BufferedReader(new InputStreamReader(
-					clientSocket.getInputStream()));
+					client.getInputStream()));
 			String inputLine, outputLine;
 			inputLine = in.readLine();
 			while (inputLine != null) {
@@ -35,7 +41,7 @@ public class MultiThreadedEchoServer extends Thread {
 			}
 			out.close();
 			in.close();
-			clientSocket.close();
+			client.close();
 
 		} catch (IOException e) {
 
@@ -43,11 +49,10 @@ public class MultiThreadedEchoServer extends Thread {
 
 	}
 
-
 	public static void main(String[] args) throws IOException {
 
 		ServerSocket serverSocket = null;
-		
+
 		MultiThreadedEchoServer multiThreadedEchoServer = null;
 
 		serverSocket = new ServerSocket(4444);
@@ -61,16 +66,14 @@ public class MultiThreadedEchoServer extends Thread {
 		while (flag) {
 
 			clientSocket = serverSocket.accept();
-			
-			multiThreadedEchoServer = 
-				new MultiThreadedEchoServer(clientSocket);
+
+			multiThreadedEchoServer = new MultiThreadedEchoServer(clientSocket);
 
 			multiThreadedEchoServer.start();
-			
+
 		}
 		System.out.println("Echo Server Stoped");
 		serverSocket.close();
 	}
-
 
 }

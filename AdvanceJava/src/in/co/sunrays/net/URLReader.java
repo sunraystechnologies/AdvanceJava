@@ -6,14 +6,16 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Scanner;
 
-/*
- * It reads html text from a URL.
+/**
+ * Reads Text from a URL. Same as ReadURL.class.
  * 
- * copyright (c) sunRays Technologies Indore
+ * You need Internet connection to see the output of this program.
  * 
- * @author: sunRays Developer
- * 
- * @url: www.sunrays.co.in
+ * @version 1.0
+ * @since 01 Feb 2015
+ * @author SUNRAYS Developer
+ * @Copyright (c) sunRays Technologies. All rights reserved.
+ * @URL www.sunrays.co.in
  */
 
 public class URLReader {
@@ -29,7 +31,6 @@ public class URLReader {
 			System.out.println("Host Name: " + u.getHost());
 			System.out.println("Port Number: " + u.getPort());
 			System.out.println("File Name: " + u.getFile());
-			
 
 			// Open input channel to read data
 			InputStream iStr = u.openStream();

@@ -4,13 +4,16 @@ import java.net.*;
 import java.util.Scanner;
 import java.io.*;
 
-/*
- * Writes parameter to a URL and read url contents 
+/**
+ * Writes Parameter to a URL.
  * 
- * copyright (c) sunRays Technologies Indore 
- * @author: sunRays Developer 
- * @url : www.sunrays.co.in
+ * You need Internet connection to see the output of this program.
  * 
+ * @version 1.0
+ * @since 01 Feb 2015
+ * @author SUNRAYS Developer
+ * @Copyright (c) sunRays Technologies. All rights reserved.
+ * @URL www.sunrays.co.in
  */
 
 public class URLWriter {
@@ -18,7 +21,7 @@ public class URLWriter {
 	public static void main(String[] args) throws Exception {
 
 		URL url = new URL("http://www.ask.com/web");
-		
+
 		String question = "java";
 
 		// Create URLConnection object

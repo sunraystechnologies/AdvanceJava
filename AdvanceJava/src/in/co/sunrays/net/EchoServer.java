@@ -4,7 +4,7 @@ import java.io.*;
 import java.net.*;
 
 /**
- * Echo Server talks to multiple Clients sequentially 
+ * Echo Server talks to multiple Clients sequentially
  * 
  * @version 1.0
  * @since 01 Feb 2015
@@ -24,15 +24,15 @@ public class EchoServer {
 		System.out.println("Echo Server is Started");
 
 		// Socket object
-		Socket cSocket = null;
+		Socket client = null;
 
 		boolean flag = true;
 		// Listen Clients until flag is false
 		while (flag) {
 			// Receive a new Client's request
-			cSocket = sSocket.accept();
+			client = sSocket.accept();
 			// Talk to the Client
-			talk(cSocket);
+			talk(client);
 		}
 
 		// Closing Server

@@ -5,7 +5,18 @@ import java.io.DataOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+/**
+ * TCP Server exchanges Hello with Client.
+ * 
+ * @version 1.0
+ * @since 01 Feb 2015
+ * @author SUNRAYS Developer
+ * @Copyright (c) sunRays Technologies. All rights reserved.
+ * @URL www.sunrays.co.in
+ */
+
 public class HelloTCPServer {
+
 	public static void main(String[] args) throws Exception {
 
 		// Create a Server

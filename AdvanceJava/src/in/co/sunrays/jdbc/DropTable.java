@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- * Creates a table using JDBC.
+ * Delete a table using JDBC.
  * 
  * @version 1.0
  * @since 01 Feb 2015
@@ -15,8 +15,8 @@ import java.sql.Statement;
  * @URL www.sunrays.co.in
  */
 
-public class CreateTable {
-
+public class DropTable {
+	
 	public static void main(String[] args) {
 
 		try {
@@ -28,11 +28,9 @@ public class CreateTable {
 
 			Statement stmt = conn.createStatement();
 
-			String sql = "CREATE TABLE ST_TESTTABLE "
-					+ "(id INTEGER not NULL, name VARCHAR(100), "
-					+ " PRIMARY KEY ( id ))";
+			String sql = "DROP TABLE  ST_TESTTABLE  ";
 
-			System.out.println("Creating table...");
+			System.out.println("Deleting table...");
 
 			stmt.executeUpdate(sql);
 
@@ -43,5 +41,6 @@ public class CreateTable {
 		}
 
 		System.out.println("Table is successfuly Creatred");
+
 	}
 }
